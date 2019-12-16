@@ -45,7 +45,13 @@ btn.forEach(button => {
 
 function clickBtn(e) {
     let key = e.target.textContent;
-    lcdArr.push(key);
+    
+    if(!isNaN(key)) {
+        lcdArr.push(key);
+    }else {
+        lcdArr.push(` ${key} `);
+    }
+    
     lcd.textContent = lcdArr.join('');
 }
 
