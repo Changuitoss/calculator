@@ -1,43 +1,27 @@
 const btn = document.querySelectorAll('.btn');
 const lcd = document.querySelector('.lcd');
+const igual = document.querySelector('.igual');
 
-
-function sum(a, b) {
-    return a + b;
-}
-
-function substract(a, b) {
-    return a - b;
-}
-
-function multiply(a, b) {
-    return a * b;
-}
-
-function divide(a, b) {
-    return a / b;
-}
-
-
-function operate(oper, a, b) {
-    switch(oper) {
-        case '+':
-            return sum(a, b);
-            break;
-        case '-':
-            return substract(a, b);
-            break;  
-        case '*':
-            return multiply(a, b);
-            break;
-        case '/':
-            return divide(a, b);
-            break;
-        default:
-            return console.log('no es una operacion valida');
+let operations = {
+   ' + ': function(a, b) {
+        return a + b;
+    },
+    
+    ' - ': function(a, b) {
+        return a - b;
+    },
+    
+    ' * ': function(a, b) {
+        return a * b;
+    },
+    
+    ' / ': function(a, b) {
+        return a / b;
     }
 }
 
+
+/* Botones numericos y operators */
 
 btn.forEach(button => {
     button.addEventListener('click', clickBtn);
@@ -47,7 +31,7 @@ function clickBtn(e) {
     let key = e.target.textContent;
     
     if(!isNaN(key)) {
-        lcdArr.push(key);
+        lcdArr.push(Number(key));
     }else {
         lcdArr.push(` ${key} `);
     }
@@ -56,3 +40,16 @@ function clickBtn(e) {
 }
 
 let lcdArr = []
+
+
+/* Boton IGUAL */
+// usar [...rest]?
+// ordenar la lcdArr para que queden primero los '*' y '/'  ??
+
+igual.addEventListener('click', clickIgual);
+
+function clickIgual(e) {
+    const [a, b, c] = lcdArr;
+    //console.log(operations[b](a, c));
+    lcd.textContent = operations[b](a, c); 
+}
