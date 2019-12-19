@@ -48,21 +48,58 @@ let lcdArr = []
 
 igual.addEventListener('click', clickIgual);
 
+
+let lcdArrTotal = [];
+
 function clickIgual(e) {
     let lcdJunto = lcdArr.join('');
     let lcdRearmado = lcdJunto.split(' ');
+    lcdArrTotal = [...lcdRearmado];
+    console.log('lcdArrTotal (dentro de clickIgual):', lcdArrTotal);
+    console.log('lcdArrTotal incluye *?:', lcdArrTotal.includes('*'));
+    console.log('lcdArrTotal length:', lcdArrTotal.length);
 
-    const [a, b, c] = lcdRearmado;
+    lcd.textContent = multiOperation(lcdArrTotal);
 
-    lcd.textContent = operations[b](Number(a), Number(c)); 
+    //const [a, b, c] = lcdRearmado;
+    //lcd.textContent = operations[b](Number(a), Number(c)); 
 }
 
+let total = 0;
 
-for (var i = 0; i < lcdArr.length; i + 2) {
-    if(lcdArr[i + 1] == '*') {
-        lcdRearmado.reduce((total, num) => {
-            return total * num
-        })
-        operations[b](Number(a), Number(c))
+
+function multiOperation(lcdArrTotal) {
+    while (lcdArrTotal.includes('*') || lcdArrTotal.includes('/')) {
+        console.log('lcdArrTotal (dentro de multiOperation):', lcdArrTotal);
+        for (var i = 0; i < lcdArrTotal.length - 1; i += 2) {
+            console.log('lcdArrTotal (dentro de multiOperation, loop):', lcdArrTotal);
+            switch(lcdArrTotal[i + 1]) {
+                case '*':
+                    total = operations['*'](lcdArrTotal[i], lcdArrTotal[i + 2]);
+                    lcdArrTotal.splice(lcdArrTotal[i], 2);
+                    lcdArrTotal[i] = total;
+                    break;
+                case '/':
+                    total = operations['/'](lcdArrTotal[i], lcdArrTotal[i + 2]);
+                    lcdArrTotal.splice(lcdArrTotal[i], 2);
+                    lcdArrTotal[i] = total;
+                    break;
+            }
+        }
     }
+    return lcdArrTotal;
 }
+
+
+
+
+/*for (var i = 0; i < lcdArr.length - 1; i + 2) {
+    switch(lcdArr[i + 1]) {
+        case '*':
+            operations['*'](lcdArr[i], lcdArr[i + 2]);
+            break;
+        case '/':
+            operations['/'](lcdArr[i], lcdArr[i + 2]);
+            break;
+    }
+}*/
