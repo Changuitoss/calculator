@@ -43,8 +43,6 @@ let lcdArr = []
 
 
 /* Boton IGUAL */
-// usar [...rest]?
-// ordenar la lcdArr para que queden primero los '*' y '/'  ??
 
 igual.addEventListener('click', clickIgual);
 
@@ -60,9 +58,6 @@ function clickIgual(e) {
     console.log('lcdArrTotal length:', lcdArrTotal.length);
 
     lcd.textContent = multiOperation(lcdArrTotal);
-
-    //const [a, b, c] = lcdRearmado;
-    //lcd.textContent = operations[b](Number(a), Number(c)); 
 }
 
 let total = 0;
@@ -70,19 +65,38 @@ let total = 0;
 
 function multiOperation(lcdArrTotal) {
     while (lcdArrTotal.includes('*') || lcdArrTotal.includes('/')) {
-        console.log('lcdArrTotal (dentro de multiOperation):', lcdArrTotal);
         for (var i = 0; i < lcdArrTotal.length - 1; i += 2) {
-            console.log('lcdArrTotal (dentro de multiOperation, loop):', lcdArrTotal);
             switch(lcdArrTotal[i + 1]) {
                 case '*':
                     total = operations['*'](lcdArrTotal[i], lcdArrTotal[i + 2]);
-                    lcdArrTotal.splice(lcdArrTotal[i], 2);
+                    lcdArrTotal.splice(i, 2);
                     lcdArrTotal[i] = total;
+                    i = 0;
                     break;
                 case '/':
                     total = operations['/'](lcdArrTotal[i], lcdArrTotal[i + 2]);
-                    lcdArrTotal.splice(lcdArrTotal[i], 2);
+                    lcdArrTotal.splice(i, 2);
                     lcdArrTotal[i] = total;
+                    i = 0;
+                    break;
+            }
+        }
+    }
+
+    while (lcdArrTotal.includes('+') || lcdArrTotal.includes('-')) {
+        for (var i = 0; i < lcdArrTotal.length - 1; i += 2) {
+            switch(lcdArrTotal[i + 1]) {
+                case '+':
+                    total = operations['+'](Number(lcdArrTotal[i]), Number(lcdArrTotal[i + 2]));
+                    lcdArrTotal.splice(i, 2);
+                    lcdArrTotal[i] = total;
+                    i = 0;
+                    break;
+                case '-':
+                    total = operations['-'](lcdArrTotal[i], lcdArrTotal[i + 2]);
+                    lcdArrTotal.splice(i, 2);
+                    lcdArrTotal[i] = total;
+                    i = 0;
                     break;
             }
         }
