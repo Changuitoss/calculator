@@ -66,7 +66,7 @@ let total = 0;
 function multiOperation(oper1, oper2) {
     while (lcdArrTotal.includes(oper1) || lcdArrTotal.includes(oper2)) {
         for (var i = 0; i < lcdArrTotal.length - 1; i += 2) {
-            if (lcdArr[0] == '-') {   // si empieza con un numero negativo
+            if (lcdArr[0] == '-' || lcdArr[0] == '+') {   // si empieza con un numero negativo
                 switch(lcdArrTotal[i + 2]) {
                     case oper1:
                         total = operations[oper1](Number(lcdArrTotal[i]), Number(lcdArrTotal[i + 2]));
@@ -81,8 +81,10 @@ function multiOperation(oper1, oper2) {
                         i = 0;
                         break;
                 }
-            } else {  // si empieza con un numero positivo
-                switch(lcdArrTotal[i + 1]) {
+            } else if (lcdArr[0] == '') {  
+                 lcd.textContent = `ERROR: Entrada no permitida (${lcdArr[1]}) en inicio.`
+            } else {
+                switch(lcdArrTotal[i + 1]) {  // si empieza con un numero positivo
                     case oper1:
                         total = operations[oper1](Number(lcdArrTotal[i]), Number(lcdArrTotal[i + 2]));
                         lcdArrTotal.splice(i, 2);
@@ -96,7 +98,6 @@ function multiOperation(oper1, oper2) {
                         i = 0;
                         break;
                 }
-
             }
         }
     }    
