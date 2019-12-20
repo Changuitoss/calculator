@@ -53,67 +53,52 @@ function clickIgual(e) {
     let lcdJunto = lcdArr.join('');
     let lcdRearmado = lcdJunto.split(' ');
     lcdArrTotal = [...lcdRearmado];
-    console.log('lcdArrTotal (dentro de clickIgual):', lcdArrTotal);
-    console.log('lcdArrTotal incluye *?:', lcdArrTotal.includes('*'));
-    console.log('lcdArrTotal length:', lcdArrTotal.length);
 
-    lcd.textContent = multiOperation(lcdArrTotal);
+    multiOperation('*', '/');
+    multiOperation('+', '-');
+
+    lcd.textContent = lcdArrTotal;
 }
 
 let total = 0;
 
 
-function multiOperation(lcdArrTotal) {
-    while (lcdArrTotal.includes('*') || lcdArrTotal.includes('/')) {
+function multiOperation(oper1, oper2) {
+    while (lcdArrTotal.includes(oper1) || lcdArrTotal.includes(oper2)) {
         for (var i = 0; i < lcdArrTotal.length - 1; i += 2) {
-            switch(lcdArrTotal[i + 1]) {
-                case '*':
-                    total = operations['*'](lcdArrTotal[i], lcdArrTotal[i + 2]);
-                    lcdArrTotal.splice(i, 2);
-                    lcdArrTotal[i] = total;
-                    i = 0;
-                    break;
-                case '/':
-                    total = operations['/'](lcdArrTotal[i], lcdArrTotal[i + 2]);
-                    lcdArrTotal.splice(i, 2);
-                    lcdArrTotal[i] = total;
-                    i = 0;
-                    break;
-            }
-        }
-    }
+            if (lcdArr[0] == '-') {   // si empieza con un numero negativo
+                switch(lcdArrTotal[i + 2]) {
+                    case oper1:
+                        total = operations[oper1](Number(lcdArrTotal[i]), Number(lcdArrTotal[i + 2]));
+                        lcdArrTotal.splice(i, 2);
+                        lcdArrTotal[i] = total;
+                        i = 0;
+                        break;
+                    case oper2:
+                        total = operations[oper2](Number(lcdArrTotal[i]), Number(lcdArrTotal[i + 2]));
+                        lcdArrTotal.splice(i, 2);
+                        lcdArrTotal[i] = total;
+                        i = 0;
+                        break;
+                }
+            } else {  // si empieza con un numero positivo
+                switch(lcdArrTotal[i + 1]) {
+                    case oper1:
+                        total = operations[oper1](Number(lcdArrTotal[i]), Number(lcdArrTotal[i + 2]));
+                        lcdArrTotal.splice(i, 2);
+                        lcdArrTotal[i] = total;
+                        i = 0;
+                        break;
+                    case oper2:
+                        total = operations[oper2](Number(lcdArrTotal[i]), Number(lcdArrTotal[i + 2]));
+                        lcdArrTotal.splice(i, 2);
+                        lcdArrTotal[i] = total;
+                        i = 0;
+                        break;
+                }
 
-    while (lcdArrTotal.includes('+') || lcdArrTotal.includes('-')) {
-        for (var i = 0; i < lcdArrTotal.length - 1; i += 2) {
-            switch(lcdArrTotal[i + 1]) {
-                case '+':
-                    total = operations['+'](Number(lcdArrTotal[i]), Number(lcdArrTotal[i + 2]));
-                    lcdArrTotal.splice(i, 2);
-                    lcdArrTotal[i] = total;
-                    i = 0;
-                    break;
-                case '-':
-                    total = operations['-'](lcdArrTotal[i], lcdArrTotal[i + 2]);
-                    lcdArrTotal.splice(i, 2);
-                    lcdArrTotal[i] = total;
-                    i = 0;
-                    break;
             }
         }
-    }
+    }    
     return lcdArrTotal;
 }
-
-
-
-
-/*for (var i = 0; i < lcdArr.length - 1; i + 2) {
-    switch(lcdArr[i + 1]) {
-        case '*':
-            operations['*'](lcdArr[i], lcdArr[i + 2]);
-            break;
-        case '/':
-            operations['/'](lcdArr[i], lcdArr[i + 2]);
-            break;
-    }
-}*/
