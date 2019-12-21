@@ -81,8 +81,10 @@ function multiOperation(oper1, oper2) {
                         i = 0;
                         break;
                 }
-            } else if (lcdArr[0] == '') {  
-                 lcd.textContent = `ERROR: Entrada no permitida (${lcdArr[1]}) en inicio.`
+            } else if (lcdArrTotal[0] == "") {  
+                 lcd.textContent = `ERROR: Entrada no permitida (${lcdArrTotal[1]}) en inicio.`
+                 lcdArrTotal = [];
+                 break;
             } else {
                 switch(lcdArrTotal[i + 1]) {  // si empieza con un numero positivo
                     case oper1:
