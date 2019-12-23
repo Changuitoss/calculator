@@ -1,6 +1,7 @@
 const btn = document.querySelectorAll('.btn');
 const lcd = document.querySelector('.lcd');
-const igual = document.querySelector('.igual');
+const igualBtn = document.querySelector('.igual');
+const clearBtn = document.querySelector('.clear');
 
 let operations = {
    '+': function(a, b) {
@@ -44,7 +45,7 @@ let lcdArr = []
 
 /* Boton IGUAL */
 
-igual.addEventListener('click', clickIgual);
+igualBtn.addEventListener('click', clickIgual);
 
 
 let lcdArrTotal = [];
@@ -55,9 +56,11 @@ function clickIgual(e) {
     lcdArrTotal = [...lcdRearmado];
 
     multiOperation('*', '/');
-    multiOperation('+', '-');
 
-    lcd.textContent = lcdArrTotal;
+    if (lcdArrTotal.length > 0) {  // si lcdArrTotal = [], es porque comenzó la operacion con "/".
+        multiOperation('+', '-');
+        lcd.textContent = lcdArrTotal;
+    }        
 }
 
 let total = 0;
@@ -82,7 +85,7 @@ function multiOperation(oper1, oper2) {
                         break;
                 }
             } else if (lcdArrTotal[0] == "") {  
-                 lcd.textContent = `ERROR: Entrada no permitida (${lcdArrTotal[1]}) en inicio.`
+                 lcd.textContent = `ERROR: ("${lcdArrTotal[1]}") no permitido en primera posicion.`
                  lcdArrTotal = [];
                  break;
             } else {
@@ -104,4 +107,15 @@ function multiOperation(oper1, oper2) {
         }
     }    
     return lcdArrTotal;
+}
+
+
+/* Botón CLEAR */
+
+
+clearBtn.addEventListener('click', clearScreen);
+
+function clearScreen() {
+    lcd.textContent = "";
+    lcdArr = [];
 }
