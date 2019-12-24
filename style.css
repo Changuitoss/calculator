@@ -1,11 +1,25 @@
 .container {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    
 }
 
 .pantalla {
     text-align: center;
     padding: 2rem 0 1rem 0;
+}
+
+.lcd {
+    border: 1px solid black;
+    width: 31rem;
+    height: 2rem;
+    margin: 0;
+}
+
+.lcd1 {
+    border-bottom: 0;
 }
 
 .teclado {

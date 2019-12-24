@@ -1,5 +1,6 @@
 const btn = document.querySelectorAll('.btn');
-const lcd = document.querySelector('.lcd');
+const lcd1 = document.querySelector('.lcd1');
+const lcd2 = document.querySelector('.lcd2');
 const igualBtn = document.querySelector('.igual');
 const clearBtn = document.querySelector('.clear');
 
@@ -24,9 +25,7 @@ let operations = {
 
 /* Botones numericos y operators */
 
-btn.forEach(button => {
-    button.addEventListener('click', clickBtn);
-})
+let lcdArr = []
 
 function clickBtn(e) {
     let key = e.target.textContent;
@@ -37,10 +36,13 @@ function clickBtn(e) {
         lcdArr.push(` ${key} `);
     }
 
-    lcd.textContent = lcdArr.join('');
+    lcd1.textContent = lcdArr.join('');
 }
 
-let lcdArr = []
+btn.forEach(button => {
+    button.addEventListener('click', clickBtn);
+})
+
 
 
 /* Boton IGUAL */
