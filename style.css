@@ -1,25 +1,41 @@
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    margin: 10% auto 10% auto;
     
 }
 
 .pantalla {
-    text-align: center;
-    padding: 2rem 0 1rem 0;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-content: center;
+    align-content: center;
+    grid-gap: 0px;
+    margin-bottom: 1rem;
 }
 
-.lcd {
+/*.lcd {
     border: 1px solid black;
-    width: 31rem;
-    height: 2rem;
-    margin: 0;
-}
+    height: 100%;
+
+}*/
 
 .lcd1 {
-    border-bottom: 0;
+    border: 1px solid black;
+    height: 100%;
+    margin-bottom: 0px;
+    text-align: end;
+    padding: 1rem 1rem 0px 0px;
+}
+.lcd2 {
+    border: 1px solid black;
+    height: 100%;
+    border-top: 0;
+    margin-top: 0px;
+    text-align: center;
 }
 
 .teclado {
@@ -28,7 +44,6 @@
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr), 1fr;
     gap: 20px;
-    justify-content: center;
 }
 
 .teclado > div {

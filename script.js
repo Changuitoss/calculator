@@ -61,8 +61,10 @@ function clickIgual(e) {
 
     if (lcdArrTotal.length > 0) {  // si lcdArrTotal = [], es porque comenzó la operacion con "/".
         multiOperation('+', '-');
-        lcd.textContent = lcdArrTotal;
-    }        
+        lcd2.textContent = lcdArrTotal;
+    }  
+    
+    lcd2.textContent = lcdArrTotal;
 }
 
 let total = 0;
