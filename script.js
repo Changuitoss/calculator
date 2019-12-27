@@ -88,10 +88,25 @@ function multiOperation(oper1, oper2) {
                         i = 0;
                         break;
                 }
-            } else if (lcdArrTotal[0] == "") {  
-                 lcd.textContent = `ERROR: ("${lcdArrTotal[1]}") no permitido en primera posicion.`
-                 lcdArrTotal = [];
+            } else if (lcdArrTotal[0] == "" && lcdArrTotal[1] != "+") {  
+                 lcdArrTotal = [`ERROR: ("${lcdArrTotal[1]}") no permitido.`];
                  break;
+            } else if (lcdArrTotal[0] == "" && lcdArrTotal[1] == "+") {  // en caso de que arranque con "+", lo borra.
+                lcdArrTotal.splice(0, 2);
+                switch(lcdArrTotal[i + 1]) {
+                    case oper1:
+                        total = operations[oper1](Number(lcdArrTotal[i]), Number(lcdArrTotal[i + 2]));
+                        lcdArrTotal.splice(i, 2);
+                        lcdArrTotal[i] = total;
+                        i = 0;
+                        break;
+                    case oper2:
+                        total = operations[oper2](Number(lcdArrTotal[i]), Number(lcdArrTotal[i + 2]));
+                        lcdArrTotal.splice(i, 2);
+                        lcdArrTotal[i] = total;
+                        i = 0;
+                        break;
+                }
             } else {
                 switch(lcdArrTotal[i + 1]) {  // si empieza con un numero positivo
                     case oper1:
@@ -120,6 +135,7 @@ function multiOperation(oper1, oper2) {
 clearBtn.addEventListener('click', clearScreen);
 
 function clearScreen() {
-    lcd.textContent = "";
+    lcd1.textContent = "";
+    lcd2.textContent = "";
     lcdArr = [];
 }
