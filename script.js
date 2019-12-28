@@ -88,7 +88,7 @@ function multiOperation(oper1, oper2) {
                         i = 0;
                         break;
                 }
-            } else if (lcdArrTotal[0] == "" && lcdArrTotal[1] != "+") {  
+            } else if (lcdArrTotal[0] == "" && lcdArrTotal[1] != "+" && lcdArrTotal[1] != "-") {  
                  lcdArrTotal = [`ERROR: ("${lcdArrTotal[1]}") no permitido.`];
                  break;
             } else if (lcdArrTotal[0] == "" && lcdArrTotal[1] == "+") {  // en caso de que arranque con "+", lo borra.
