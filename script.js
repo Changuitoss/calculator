@@ -3,6 +3,7 @@ const lcd1 = document.querySelector('.lcd1');
 const lcd2 = document.querySelector('.lcd2');
 const igualBtn = document.querySelector('.igual');
 const clearBtn = document.querySelector('.clear');
+const puntoBtn = document.querySelector('.punto');
 
 let operations = {
    '+': function(a, b) {
@@ -32,8 +33,10 @@ function clickBtn(e) {
     
     if(!isNaN(key)) {
         lcdArr.push(Number(key));
-    } else if (key != '=') {
+    } else if (key != '=' && key != '.') {
         lcdArr.push(` ${key} `);
+    } else if (key != '=') {
+        lcdArr.push(`${key}`);
     }
 
     lcd1.textContent = lcdArr.join('');
@@ -61,10 +64,10 @@ function clickIgual(e) {
 
     if (lcdArrTotal.length > 0) {  // si lcdArrTotal = [], es porque comenzó la operacion con "/".
         multiOperation('+', '-');
-        lcd2.textContent = lcdArrTotal;
+        lcd2.textContent = lcdArrTotal[0].toFixed(2);
     }  
     
-    lcd2.textContent = lcdArrTotal;
+    lcd2.textContent = lcdArrTotal[0].toFixed(2);
 }
 
 let total = 0;
@@ -119,3 +122,6 @@ function clearScreen() {
     lcd2.textContent = "";
     lcdArr = [];
 }
+
+
+//todo: que marque las centenes con el resultado    

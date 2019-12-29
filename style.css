@@ -19,12 +19,14 @@
     justify-content: center;
     align-content: flex-start;
     grid-gap: 0px;
-    margin-bottom: 1rem;
+    margin-bottom: 10px;
     font-family: 'Electrolize', sans-serif;
 }
 
 .lcd1 {
-    border: 1px solid black;
+    border: 1px solid lightgrey;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
     border-bottom: 0px;
     height: 100%;
     text-align: end;
@@ -33,7 +35,10 @@
 }
 
 .lcd2 {
-    border: 1px solid black;
+    border: 1px solid lightgrey;
+    border-top: 1px dotted lightgrey;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
     height: 100%;
     margin: 0px;
     text-align: center;
@@ -44,14 +49,14 @@
     display: grid;
     width: 50%;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr), 1fr;
+    grid-template-rows: repeat(4, 1fr), 1fr 1fr;
     gap: 10px;
     font-family: 'Roboto', sans-serif;
     color: blue;
 }
 
 .teclado > div {
-    border: 1px solid black;
+    border: 1px solid lightgrey;
     border-radius: 5px;
     text-align: center;
     padding: 1rem;
@@ -59,8 +64,8 @@
 
 .suma {
     display: grid;
-    grid-row-start: 3;
-    grid-row-end: 5;
+    grid-row-start: 4;
+    grid-row-end: 6;
     grid-column-start: 4;
     grid-column-end: 5;
     align-content: center;
@@ -70,5 +75,5 @@
     grid-row-start: 5;
     grid-row-end: 6;
     grid-column-start: 1;
-    grid-column-end: 5;
+    grid-column-end: 4;
 }
