@@ -33,9 +33,9 @@ function clickBtn(e) {
 
     if(!isNaN(key)) {
         lcdArr.push(Number(key));
-    } else if (key != '=' && key != '.') {
+    } else if (key != '=' && key != '.' && key != 'Back') {
         lcdArr.push(` ${key} `);
-    } else if (key != '=') {
+    } else if (key != '=' && key != 'Back') {
         lcdArr.push(`${key}`);
     }  
 
@@ -54,6 +54,13 @@ btn.forEach(button => {
 
 /* Boton IGUAL */
 
+function setDisplay() { // reordena los arrays para mostrar en lcd1 y lcd2
+    let lcdJunto = lcdArr.join('');
+    let lcdRearmado = lcdJunto.split(' ');
+    lcdArrTotal = [...lcdRearmado];
+    return 
+}
+
 igualBtn.addEventListener('click', clickIgual);
 
 
@@ -68,18 +75,15 @@ function isFloat(n) {
 }
 
 function clickIgual(e) {
-    let lcdJunto = lcdArr.join('');
-    let lcdRearmado = lcdJunto.split(' ');
-    lcdArrTotal = [...lcdRearmado];
-
+    setDisplay();
     multiOperation('*', '/');
 
-    if (lcdArrTotal.length > 0) {  // si lcdArrTotal = [], es porque comenzó la operacion con "/".
+    if (lcdArrTotal.length > 1) {  
         multiOperation('+', '-');
         isFloat(lcdArrTotal[0]);
     }  
     
-    lcd2.textContent = isFloat(lcdArrTotal[0]);
+    isFloat(lcdArrTotal[0]);
     lcdArr = lcdArrTotal; // para arrancar a trabajar con el resultado que tenés hasta el momento cuando ya apretaste IGUAL.
 }
 

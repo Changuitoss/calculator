@@ -2,6 +2,13 @@
     box-sizing: border-box;
 }
 
+:root {
+    --operator-button: red;
+    --number-button: blue;
+    --screen-color: black;
+    --border-color: red;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -24,7 +31,7 @@
 }
 
 .lcd1 {
-    border: 1px solid lightgrey;
+    border: 1px solid var(--border-color);
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     border-bottom: 0px;
@@ -35,8 +42,8 @@
 }
 
 .lcd2 {
-    border: 1px solid lightgrey;
-    border-top: 1px dotted lightgrey;
+    border: 1px solid var(--border-color);
+    border-top: 1px dotted var(--border-color);
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     height: 100%;
@@ -52,14 +59,18 @@
     grid-template-rows: repeat(4, 1fr), 1fr 1fr;
     gap: 10px;
     font-family: 'Roboto', sans-serif;
-    color: blue;
+    color: var(--number-button);
 }
 
 .teclado > div {
-    border: 1px solid lightgrey;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     text-align: center;
     padding: 1rem;
+}
+
+.oper {
+    color: var(--operator-button);
 }
 
 .suma {
@@ -69,6 +80,7 @@
     grid-column-start: 4;
     grid-column-end: 5;
     align-content: center;
+    
 }
 
 .clear {
