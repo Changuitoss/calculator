@@ -37,9 +37,13 @@ function clickBtn(e) {
         lcdArr.push(` ${key} `);
     } else if (key != '=') {
         lcdArr.push(`${key}`);
-    }
+    }  
 
-    lcd1.textContent = lcdArr.join('');
+    if (lcdArrTotal.length != 0 && lcdArr[0] != total) {
+        lcd1.textContent = lcdArrTotal;
+    } else {
+        lcd1.textContent = lcdArr.join('');
+    }  
 }
 
 btn.forEach(button => {
@@ -76,6 +80,7 @@ function clickIgual(e) {
     }  
     
     lcd2.textContent = isFloat(lcdArrTotal[0]);
+    lcdArr = lcdArrTotal; // para arrancar a trabajar con el resultado que tenés hasta el momento cuando ya apretaste IGUAL.
 }
 
 let total = 0;
@@ -128,6 +133,7 @@ clearBtn.addEventListener('click', clearScreen);
 function clearScreen() {
     lcd1.textContent = "";
     lcd2.textContent = "";
+    lcdArrTotal = [];
     lcdArr = [];
     total = [];
 }
