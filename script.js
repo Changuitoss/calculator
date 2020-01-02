@@ -30,7 +30,7 @@ let lcdArr = []
 
 function clickBtn(e) {
     let key = e.target.textContent;
-    
+
     if(!isNaN(key)) {
         lcdArr.push(Number(key));
     } else if (key != '=' && key != '.') {
@@ -55,6 +55,14 @@ igualBtn.addEventListener('click', clickIgual);
 
 let lcdArrTotal = [];
 
+function isFloat(n) {
+    if (n % 1 != 0) {
+        return lcd2.textContent = n.toFixed(2);
+    } else {
+        return lcd2.textContent = n;
+    }
+}
+
 function clickIgual(e) {
     let lcdJunto = lcdArr.join('');
     let lcdRearmado = lcdJunto.split(' ');
@@ -64,10 +72,10 @@ function clickIgual(e) {
 
     if (lcdArrTotal.length > 0) {  // si lcdArrTotal = [], es porque comenzó la operacion con "/".
         multiOperation('+', '-');
-        lcd2.textContent = lcdArrTotal[0].toFixed(2);
+        isFloat(lcdArrTotal[0]);
     }  
     
-    lcd2.textContent = lcdArrTotal[0].toFixed(2);
+    lcd2.textContent = isFloat(lcdArrTotal[0]);
 }
 
 let total = 0;
@@ -121,6 +129,7 @@ function clearScreen() {
     lcd1.textContent = "";
     lcd2.textContent = "";
     lcdArr = [];
+    total = [];
 }
 
 
