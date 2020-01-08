@@ -28,14 +28,29 @@ let operations = {
 
 let lcdArr = []
 
+btn.forEach(button => {
+    button.addEventListener('click', clickBtn);
+})
+
 function clickBtn(e) {
     let key = e.target.textContent;
+    input(key)
+}
+
+function input(key) {
+    if (key == 'Enter') {
+        clickIgual();
+    }
+
+    if(key == 'Backspace') {
+        clearScreen();
+    }
 
     if(!isNaN(key)) {
         lcdArr.push(Number(key));
-    } else if (key != '=' && key != '.' && key != 'Back') {
+    } else if (key == '+' || key == '-' || key == '*' || key == '/') {
         lcdArr.push(` ${key} `);
-    } else if (key != '=' && key != 'Back') {
+    } else if (key == '.') {
         lcdArr.push(`${key}`);
     }  
 
@@ -43,36 +58,24 @@ function clickBtn(e) {
         lcd1.textContent = lcdArrTotal;
     } else {
         lcd1.textContent = lcdArr.join('');
-    }  
+    }
 }
 
-btn.forEach(button => {
-    button.addEventListener('click', clickBtn);
-})
+window.addEventListener('keydown', numPad);
 
+function numPad(e) {
+    let key = e.key;
+    input(key);
+}
 
 
 /* Boton IGUAL */
 
-function setDisplay() { // reordena los arrays para mostrar en lcd1 y lcd2
-    let lcdJunto = lcdArr.join('');
-    let lcdRearmado = lcdJunto.split(' ');
-    lcdArrTotal = [...lcdRearmado];
-    return 
-}
+let lcdArrTotal = [];
+let total = 0;
 
 igualBtn.addEventListener('click', clickIgual);
 
-
-let lcdArrTotal = [];
-
-function isFloat(n) {
-    if (n % 1 != 0) {
-        return lcd2.textContent = n.toFixed(2);
-    } else {
-        return lcd2.textContent = n;
-    }
-}
 
 function clickIgual(e) {
     setDisplay();
@@ -87,23 +90,11 @@ function clickIgual(e) {
     lcdArr = lcdArrTotal; // para arrancar a trabajar con el resultado que tenés hasta el momento cuando ya apretaste IGUAL.
 }
 
-let total = 0;
-
-function execOperations(i, step, oper1, oper2) {
-    switch(lcdArrTotal[i + step]) {
-        case oper1:
-            total = operations[oper1](Number(lcdArrTotal[i]), Number(lcdArrTotal[i + 2]));
-            lcdArrTotal.splice(i, 2);
-            lcdArrTotal[i] = total;
-            i = 0;
-            break;
-        case oper2:
-            total = operations[oper2](Number(lcdArrTotal[i]), Number(lcdArrTotal[i + 2]));
-            lcdArrTotal.splice(i, 2);
-            lcdArrTotal[i] = total;
-            i = 0;
-            break;
-    }
+function setDisplay() { // reordena los arrays para mostrar en lcd1 y lcd2
+    let lcdJunto = lcdArr.join('');
+    let lcdRearmado = lcdJunto.split(' ');
+    lcdArrTotal = [...lcdRearmado];
+    return 
 }
 
 function multiOperation(oper1, oper2) {
@@ -127,6 +118,33 @@ function multiOperation(oper1, oper2) {
     }    
     return lcdArrTotal;
 }
+
+function isFloat(n) {
+    if (n % 1 != 0) {
+        return lcd2.textContent = n.toFixed(2);
+    } else {
+        return lcd2.textContent = n;
+    }
+}
+
+function execOperations(i, step, oper1, oper2) {
+    switch(lcdArrTotal[i + step]) {
+        case oper1:
+            total = operations[oper1](Number(lcdArrTotal[i]), Number(lcdArrTotal[i + 2]));
+            lcdArrTotal.splice(i, 2);
+            lcdArrTotal[i] = total;
+            i = 0;
+            break;
+        case oper2:
+            total = operations[oper2](Number(lcdArrTotal[i]), Number(lcdArrTotal[i + 2]));
+            lcdArrTotal.splice(i, 2);
+            lcdArrTotal[i] = total;
+            i = 0;
+            break;
+    }
+}
+
+
 
 
 /* Botón CLEAR */

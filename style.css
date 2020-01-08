@@ -3,10 +3,15 @@
 }
 
 :root {
-    --operator-button: red;
-    --number-button: blue;
+    --background: white;
+    --operator-button: #68575D;
+    --number-button: #A47F7B;
     --screen-color: black;
-    --border-color: red;
+    --border-color: #D0A196;
+}
+
+body {
+    background-color: var(--background);
 }
 
 .container {
@@ -67,6 +72,10 @@
     border-radius: 5px;
     text-align: center;
     padding: 1rem;
+}
+
+.teclado > div:hover {
+    background-color: red;
 }
 
 .oper {
